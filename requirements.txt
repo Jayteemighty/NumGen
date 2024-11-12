@@ -1,0 +1,15 @@
+asgiref
+dj-database-url
+Django
+django-heroku
+gunicorn
+numpy
+pandas
+psycopg2
+python-dateutil
+python-decouple
+pytz
+six
+sqlparse
+tzdata
+whitenoise

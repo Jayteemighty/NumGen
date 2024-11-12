@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Numgen</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1 id="title">Generator Input</h1>
+        <p id="description">Kindly fill in your input values</p>
+      </header>
+
+      <form id="survey-form" method="post">
+        {% csrf_token %}
+        <div class="form-input">
+          <label id="name-label">Fixed Var 1</label>
+          <input
+            type="text"
+            name="Fixed Var 1"
+            id="name"
+            placeholder="Enter a whole number e.g 37"
+            class="form-input-size"
+            required
+          />
+        </div>
+        <div class="form-input">
+          <label id="email-label">Fixed Var 2</label>
+          <input
+            type="text"
+            name="Fixed Var 2"
+            id="email"
+            placeholder="Enter a whole number e.g 40"
+            class="form-input-size"
+            required
+          />
+        </div>
+        <div class="form-input">
+          <label id="number-label"
+            >Variable 1
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="text"
+            name="Var 1"
+            id="number"
+            placeholder="Enter your range i.e 15-25"
+            min="0"
+            max="80"
+            class="form-input-size"
+          />
+        </div>
+        <div class="form-input">
+          <label id="number-label"
+            >Variable 2
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="text"
+            name="Var 2"
+            id="number"
+            placeholder="Enter your range i.e 15-25"
+            min="0"
+            max="80"
+            class="form-input-size"
+          />
+        </div>
+        <div class="form-input">
+          <label id="number-label"
+            >Variable 3
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="text"
+            name="Var 3"
+            id="number"
+            placeholder="Enter your range i.e 15-25"
+            min="0"
+            max="80"
+            class="form-input-size"
+          />
+        </div>
+
+        <div class="form-input">
+          <button type="submit" id="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

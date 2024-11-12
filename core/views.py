@@ -8,38 +8,43 @@ import os
 
 def index(request):
     if request.method == "POST":
-        # File root
         root = os.path.dirname(os.path.abspath(__file__))
 
-        fixedVar1 = request.POST["Fixed Var 1"]
-        fixedVar1 = formatInputData(fixedVar1)
+        # Get input data and format it
+        fixedVar1 = formatInputData(request.POST["Fixed Var 1"])
+        fixedVar2 = formatInputData(request.POST["Fixed Var 2"])
+        var1 = formatInputData(request.POST["Var 1"])
+        var2 = formatInputData(request.POST["Var 2"])
+        var3 = formatInputData(request.POST["Var 3"])
 
-        fixedVar2 = request.POST["Fixed Var 2"]
-        fixedVar2 = formatInputData(fixedVar2)
-
-        var1 = request.POST["Var 1"]
-        var1 = formatInputData(var1)
-
-        var2 = request.POST["Var 2"]
-        var2 = formatInputData(var2)
-
-        var3 = request.POST["Var 3"]
-        var3 = formatInputData(var3)
-
+        # Check for invalid range
         if var2[0] <= var1[0] or var3[0] <= var2[0]:
             return render(request, 'core/result.html')
 
-        all_combinations = {i: [] for i in var1}
+        # Dictionary to store combinations, with each 'fxd1' having its own list
+        combinations_dict = {}
+        max_length = 0  # Track max length of combinations to pad columns later
+
         for i in fixedVar1:
+            fxd1_combinations = []  # List to store combinations for this `fxd1`
             for j in fixedVar2:
                 if i >= j:
                     continue
                 combinations = rand(i, j, var1, var2, var3)
-                for key, value in combinations.items():
-                    all_combinations[key].extend(value)
-        
-        # Convert dictionary to DataFrame ensuring each list is a column
-        df = pd.DataFrame({k: pd.Series(v) for k, v in all_combinations.items()})
+                
+                # Flatten and store all combinations for the current `fxd1`
+                for value in combinations.values():
+                    fxd1_combinations.extend(value)
+            
+            combinations_dict[f"fxd1_{i}"] = fxd1_combinations
+            max_length = max(max_length, len(fxd1_combinations))
+
+        # Pad each list in `combinations_dict` to have the same length
+        for key, value in combinations_dict.items():
+            combinations_dict[key] = value + [None] * (max_length - len(value))
+
+        # Convert dictionary to DataFrame with each `fxd1` as a separate column
+        df = pd.DataFrame(combinations_dict)
         df.to_csv(f"{root}/static/core/combinations.csv", index=False)
 
         return redirect('result')

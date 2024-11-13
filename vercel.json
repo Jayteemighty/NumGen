@@ -9,7 +9,7 @@
     "routes": [
       {
         "src": "/static/(.*)",
-        "dest": "/staticfiles/$1"  // Ensure it points to the staticfiles directory
+        "dest": "/staticfiles/$1"
       },
       {
         "src": "/(.*)",
@@ -17,7 +17,7 @@
       }
     ],
     "hooks": {
-      "build": "python manage.py collectstatic --noinput"  // Run collectstatic during build
+      "build": "python manage.py collectstatic --noinput"
     }
   }
   

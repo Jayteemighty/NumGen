@@ -11,44 +11,44 @@
   <body>
     <div class="container">
       <header>
-        <h1 id="title">Generator Input</h1>
+        <h1 id="title">Chidi Codes Generator</h1>
         <p id="description">Kindly fill in your input values</p>
       </header>
 
       <form id="survey-form" method="post">
         {% csrf_token %}
         <div class="form-input">
-          <label id="name-label">Fixed Var 1</label>
+          <label id="name-label">Row 1</label>
           <input
             type="text"
             name="Fixed Var 1"
             id="name"
-            placeholder="Enter a whole number e.g 37"
+            placeholder="Enter numbers and separate with , e.g 37,38,39"
             class="form-input-size"
             required
           />
         </div>
         <div class="form-input">
-          <label id="email-label">Fixed Var 2</label>
+          <label id="email-label">Row 2</label>
           <input
             type="text"
             name="Fixed Var 2"
             id="email"
-            placeholder="Enter a whole number e.g 40"
+            placeholder="Enter numbers and separate with , e.g 47,48,49"
             class="form-input-size"
             required
           />
         </div>
         <div class="form-input">
           <label id="number-label"
-            >Variable 1
+            >Row 3
             <span style="color: red">*</span>
           </label>
           <input
             type="text"
             name="Var 1"
             id="number"
-            placeholder="Enter your range i.e 15-25"
+            placeholder="Enter numbers and separate with , e.g 57,58,59"
             min="0"
             max="80"
             class="form-input-size"
@@ -56,14 +56,14 @@
         </div>
         <div class="form-input">
           <label id="number-label"
-            >Variable 2
+            >Row 4
             <span style="color: red">*</span>
           </label>
           <input
             type="text"
             name="Var 2"
             id="number"
-            placeholder="Enter your range i.e 15-25"
+            placeholder="Enter numbers and separate with , e.g 67,68,69"
             min="0"
             max="80"
             class="form-input-size"
@@ -71,14 +71,14 @@
         </div>
         <div class="form-input">
           <label id="number-label"
-            >Variable 3
+            >Row 5
             <span style="color: red">*</span>
           </label>
           <input
             type="text"
             name="Var 3"
             id="number"
-            placeholder="Enter your range i.e 15-25"
+            placeholder="Enter numbers and separate with , e.g 77,78,79"
             min="0"
             max="80"
             class="form-input-size"

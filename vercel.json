@@ -3,18 +3,21 @@
       {
         "src": "numgen/wsgi.py",
         "use": "@vercel/python",
-        "config": {"maxLambdaSize": "15mb", "runtime": "python3.9"}
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
       }
     ],
     "routes": [
       {
         "src": "/static/(.*)",
-        "dest": "/static/$1"
+        "dest": "/staticfiles/$1"  // Ensure it points to the staticfiles directory
       },
       {
         "src": "/(.*)",
         "dest": "numgen/wsgi.py"
       }
-    ]
+    ],
+    "hooks": {
+      "build": "python manage.py collectstatic --noinput"  // Run collectstatic during build
+    }
   }
   

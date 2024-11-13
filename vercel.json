@@ -22,9 +22,6 @@
         "src": "/(.*)",
         "dest": "numgen/wsgi.py"
       }
-    ],
-    "hooks": {
-      "build": "python manage.py collectstatic --noinput"
-    }
+    ]
   }
   

@@ -5,11 +5,14 @@ from django.views.static import serve
 from .utils import rand, formatInputData
 import pandas as pd
 import os
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from .utils import rand, formatInputData
+import pandas as pd
+import io
 
 def index(request):
     if request.method == "POST":
-        root = os.path.dirname(os.path.abspath(__file__))
-
         # Get input data and format it
         fixedVar1 = formatInputData(request.POST["Fixed Var 1"])
         fixedVar2 = formatInputData(request.POST["Fixed Var 2"])
@@ -45,12 +48,21 @@ def index(request):
 
         # Convert dictionary to DataFrame with each `fxd1` as a separate column
         df = pd.DataFrame(combinations_dict)
-        df.to_csv(f"{root}/static/core/combinations.csv", index=False)
 
-        return redirect('result')
+        # Save DataFrame to an in-memory buffer
+        buffer = io.StringIO()
+        df.to_csv(buffer, index=False)
+        buffer.seek(0)
+
+        # Return the CSV file as a downloadable response
+        response = HttpResponse(buffer, content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=combinations.csv'
+
+        return response
 
     context = {}
     return render(request, 'core/index.html', context)
+
 
 def result(request):
     root = os.path.dirname(os.path.abspath(__file__))
